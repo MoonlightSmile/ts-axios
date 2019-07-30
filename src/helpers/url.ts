@@ -10,17 +10,14 @@ const encode = (val: string): string =>
     .replace(/%5D/gi, ']')
 
 const computedValue = (value: any, key: string): string => {
-  let res = ''
   if (Array.isArray(value)) {
-    res = value.map(el => `${key}[]=${el}`).join('&')
+    value = value.map(el => `${key}[]=${el}`).join('&')
   } else if (isDate(value)) {
-    res = value.toISOString()
+    value = value.toISOString()
   } else if (isObject(value)) {
-    res = JSON.stringify(value)
-  } else {
-    res = value
+    value = JSON.stringify(value)
   }
-  return `${encode(key)}=${encode(res)}`
+  return `${encode(key)}=${encode(value)}`
 }
 
 export function bulidURL(url: string, params?: any) {
