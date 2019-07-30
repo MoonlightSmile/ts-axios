@@ -1,4 +1,4 @@
-import { isDate, isObject } from './util'
+import { isDate, isPlainObject } from './util'
 const encode = (val: string): string =>
   encodeURIComponent(val)
     .replace(/%40/g, '@')
@@ -14,7 +14,7 @@ const computedValue = (value: any, key: string): string => {
     value = value.map(el => `${key}[]=${el}`).join('&')
   } else if (isDate(value)) {
     value = value.toISOString()
-  } else if (isObject(value)) {
+  } else if (isPlainObject(value)) {
     value = JSON.stringify(value)
   }
   return `${encode(key)}=${encode(value)}`
@@ -38,7 +38,5 @@ export function bulidURL(url: string, params?: any) {
     }
     url += (url.includes('?') ? '&' : '?') + computedParams
   }
-  console.log(url)
-
   return url
 }
