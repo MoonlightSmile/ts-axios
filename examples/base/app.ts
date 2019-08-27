@@ -8,6 +8,10 @@ axios({
     b: 2
   }
 })
+  .then(res => {
+    console.log(res)
+  })
+  .catch()
 
 axios({
   method: 'post',
@@ -17,6 +21,10 @@ axios({
     a: '1'
   }
 })
+  .then(res => {
+    console.log(res)
+  })
+  .catch()
 
 const paramsString = 'q=URLUtils.searchParams&topic=api'
 const searchParams = new URLSearchParams(paramsString)

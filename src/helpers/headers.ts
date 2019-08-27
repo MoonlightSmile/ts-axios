@@ -22,3 +22,11 @@ export function processHeaders(headers: any, data: any): any {
   }
   return headers
 }
+
+export function parseHeaders(headers: string): any {
+  headers.split('\r\n').reduce<any>((res, el) => {
+    const [key, value] = el.split(':').map(name => name.trim())
+    if (key) res[key.toLocaleLowerCase()] = value
+    return res
+  }, Object.create(null))
+}
